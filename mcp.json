@@ -1,0 +1,108 @@
+{
+  "mcpServers": {
+    "secure-scanner": {
+      "description": "Provides tools to run Orca and Snyk security scans.",
+      "baseUrl": "http://localhost:8000",
+      "auth": {
+        "type": "apiKey",
+        "headerName": "X-API-Key",
+        "envVar": "API_KEY"
+      },
+      "tools": {
+        "scan_orca": {
+          "description": "Run an Orca security scan on a specified project path.",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "project_path": {
+                "type": "string",
+                "description": "The absolute or relative path to the project directory to scan."
+              },
+              "scan_type": {
+                "type": "string",
+                "description": "Type of scan ('full' or 'quick'). Defaults to 'full'.",
+                "enum": ["full", "quick"],
+                "default": "full"
+              },
+              "organization_id": {
+                "type": "string",
+                "description": "Optional Orca tenant ID to use for the scan. Defaults to the server's configured ORCA_TENANT."
+              }
+            },
+            "required": ["project_path"]
+          },
+          "outputSchema": {
+            "type": "object",
+            "properties": {
+              "status": {"type": "string", "description": "Scan status ('success' or 'error')."},
+              "results": {"type": "object", "description": "Scan results (JSON object from Orca CLI or error details)."},
+              "message": {"type": "string", "description": "A message describing the outcome."}
+            }
+          },
+          "endpoint": "/scan/orca",
+          "method": "POST"
+        },
+        "scan_snyk": {
+          "description": "Run a Snyk security scan on a specified project path.",
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "project_path": {
+                "type": "string",
+                "description": "The absolute or relative path to the project directory to scan."
+              },
+              "scan_type": {
+                "type": "string",
+                "description": "Type of scan ('full' or 'quick'). Defaults to 'full'. Quick scan sets severity threshold to high.",
+                "enum": ["full", "quick"],
+                "default": "full"
+              },
+              "organization_id": {
+                "type": "string",
+                "description": "Optional Snyk organization ID to use for the scan. Defaults to the server's configured SNYK_TENANT."
+              }
+            },
+            "required": ["project_path"]
+          },
+          "outputSchema": {
+            "type": "object",
+            "properties": {
+              "status": {"type": "string", "description": "Scan status ('success' or 'error')."},
+              "results": {"type": "object", "description": "Scan results (JSON object from Snyk CLI or error details)."},
+              "message": {"type": "string", "description": "A message describing the outcome."}
+            }
+          },
+          "endpoint": "/scan/snyk",
+          "method": "POST"
+        },
+        "get_snyk_organizations": {
+          "description": "Retrieve the list of Snyk organizations accessible via the configured Snyk API token.",
+          "inputSchema": {
+            "type": "object",
+            "properties": {}
+          },
+          "outputSchema": {
+            "type": "object",
+            "properties": {
+              "orgs": {
+                "type": "array",
+                "description": "List of Snyk organizations.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {"type": "string", "description": "Organization name."}, 
+                    "id": {"type": "string", "description": "Organization ID."}
+                  },
+                  "required": ["name", "id"]
+                }
+              }
+            },
+            "required": ["orgs"]
+          },
+          "endpoint": "/snyk/organizations",
+          "method": "GET"
+        }
+      }
+    }
+  }
+}

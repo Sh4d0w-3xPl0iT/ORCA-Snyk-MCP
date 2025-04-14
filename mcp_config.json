@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Scan: Snyk (Full) (Windows)",
+    "description": "Runs a full Snyk scan via the local MCP server (Requires server running & API_KEY env var).",
+    "command": "curl -X POST http://localhost:8000/scan/snyk -H \"X-API-Key: $Env:API_KEY\" -H \"Content-Type: application/json\" -d \"{\\\"project_path\\\": \\\"${workspaceFolder}\\\"}\" | cat",
+    "cwd": "${workspaceFolder}"
+  },
+  {
+    "name": "Scan: Snyk (Quick) (Windows)",
+    "description": "Runs a quick Snyk scan (high severity) via the local MCP server (Requires server running & API_KEY env var).",
+    "command": "curl -X POST http://localhost:8000/scan/snyk -H \"X-API-Key: $Env:API_KEY\" -H \"Content-Type: application/json\" -d \"{\\\"project_path\\\": \\\"${workspaceFolder}\\\", \\\"scan_type\\\": \\\"quick\\\"}\" | cat",
+    "cwd": "${workspaceFolder}"
+  },
+  {
+    "name": "Scan: Orca (Full) (Windows)",
+    "description": "Runs a full Orca scan via the local MCP server (Requires server running & API_KEY env var).",
+    "command": "curl -X POST http://localhost:8000/scan/orca -H \"X-API-Key: $Env:API_KEY\" -H \"Content-Type: application/json\" -d \"{\\\"project_path\\\": \\\"${workspaceFolder}\\\"}\" | cat",
+    "cwd": "${workspaceFolder}"
+  },
+  {
+    "name": "Scan: Orca (Quick) (Windows)",
+    "description": "Runs a quick Orca scan via the local MCP server (Requires server running & API_KEY env var).",
+    "command": "curl -X POST http://localhost:8000/scan/orca -H \"X-API-Key: $Env:API_KEY\" -H \"Content-Type: application/json\" -d \"{\\\"project_path\\\": \\\"${workspaceFolder}\\\", \\\"scan_type\\\": \\\"quick\\\"}\" | cat",
+    "cwd": "${workspaceFolder}"
+  },
+
+  {
+    "name": "Scan: Snyk (Full) (Linux/Mac)",
+    "description": "Runs a full Snyk scan via the local MCP server (Requires server running & API_KEY env var).",
+    "command": "curl -X POST http://localhost:8000/scan/snyk -H \"X-API-Key: $API_KEY\" -H \"Content-Type: application/json\" -d \"{\\\"project_path\\\": \\\"${workspaceFolder}\\\"}\" | cat",
+    "cwd": "${workspaceFolder}"
+  },
+  {
+    "name": "Scan: Snyk (Quick) (Linux/Mac)",
+    "description": "Runs a quick Snyk scan (high severity) via the local MCP server (Requires server running & API_KEY env var).",
+    "command": "curl -X POST http://localhost:8000/scan/snyk -H \"X-API-Key: $API_KEY\" -H \"Content-Type: application/json\" -d \"{\\\"project_path\\\": \\\"${workspaceFolder}\\\", \\\"scan_type\\\": \\\"quick\\\"}\" | cat",
+    "cwd": "${workspaceFolder}"
+  },
+  {
+    "name": "Scan: Orca (Full) (Linux/Mac)",
+    "description": "Runs a full Orca scan via the local MCP server (Requires server running & API_KEY env var).",
+    "command": "curl -X POST http://localhost:8000/scan/orca -H \"X-API-Key: $API_KEY\" -H \"Content-Type: application/json\" -d \"{\\\"project_path\\\": \\\"${workspaceFolder}\\\"}\" | cat",
+    "cwd": "${workspaceFolder}"
+  },
+  {
+    "name": "Scan: Orca (Quick) (Linux/Mac)",
+    "description": "Runs a quick Orca scan via the local MCP server (Requires server running & API_KEY env var).",
+    "command": "curl -X POST http://localhost:8000/scan/orca -H \"X-API-Key: $API_KEY\" -H \"Content-Type: application/json\" -d \"{\\\"project_path\\\": \\\"${workspaceFolder}\\\", \\\"scan_type\\\": \\\"quick\\\"}\" | cat",
+    "cwd": "${workspaceFolder}"
+  }
+] 
